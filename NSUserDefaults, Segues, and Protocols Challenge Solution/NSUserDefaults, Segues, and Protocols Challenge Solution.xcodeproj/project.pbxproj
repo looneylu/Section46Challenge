@@ -122,9 +122,9 @@
 				84E0D7EB197EF0B900A0D7AC /* LRCViewController.h */,
 				84E0D7EC197EF0B900A0D7AC /* LRCViewController.m */,
 				84E0D80B197EF13A00A0D7AC /* SignInViewController.h */,
+				84E0D80C197EF13A00A0D7AC /* SignInViewController.m */,
 				84E0D80E197EF16600A0D7AC /* CreateAccountViewController.h */,
 				84E0D80F197EF16600A0D7AC /* CreateAccountViewController.m */,
-				84E0D80C197EF13A00A0D7AC /* SignInViewController.m */,
 				84E0D7EE197EF0B900A0D7AC /* Images.xcassets */,
 				84E0D7DD197EF0B900A0D7AC /* Supporting Files */,
 			);

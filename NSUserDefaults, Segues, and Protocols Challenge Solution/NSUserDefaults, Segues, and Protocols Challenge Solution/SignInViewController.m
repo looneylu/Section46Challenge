@@ -7,8 +7,9 @@
 //
 
 #import "SignInViewController.h"
+#import "CreateAccountViewController.h"
 
-@interface SignInViewController () <UITextFieldDelegate>
+@interface SignInViewController () <UITextFieldDelegate, CreateAccountViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextfield;
@@ -23,6 +24,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.passwordTextfield.delegate = self;
 }
 
 #pragma mark - IBAction methods
@@ -43,7 +46,21 @@
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
+    // hide keyboard
+    [self.passwordTextfield resignFirstResponder];
+    
     return YES;
+}
+
+- (void) didCancel
+{
+    // dismiss CreateAccountViewController without saving any information
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) didCreateAccount
+{
+    
 }
 
 #pragma mark - Navigation
@@ -52,7 +69,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.destinationViewController isKindOfClass:[CreateAccountViewController class]])
+    {
+        // make an instance of CreateAccountViewController and designate it as a delegate
+        CreateAccountViewController *createAccountVC = segue.destinationViewController;
+        
+        createAccountVC.delegate = self; 
+    }
 }
 
 

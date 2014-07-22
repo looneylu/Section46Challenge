@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CreateAccountViewControllerDelegate <NSObject>
+
+@required
+
+- (void) didCancel;
+- (void) didCreateAccount;
+
+@end
+
 @interface CreateAccountViewController : UIViewController
+
+@property (weak, nonatomic) id <CreateAccountViewControllerDelegate> delegate;
 
 @end

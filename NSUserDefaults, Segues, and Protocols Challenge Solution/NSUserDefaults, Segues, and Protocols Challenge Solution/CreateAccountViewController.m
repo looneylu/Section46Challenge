@@ -31,12 +31,14 @@
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
-
+    //call delegate method for didCancel
+    [self.delegate didCancel];
 }
 
 - (IBAction)createAccountButtonPressed:(id)sender
 {
-
+    //call delegate method for didCreateAccount
+    [self.delegate didCreateAccount]; 
 }
 
 #pragma mark - Delegate Methods
