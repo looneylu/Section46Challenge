@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LRCViewControllerDelegate <NSObject>
+
+@required
+
+- (void)logOut;
+
+@end
+
 @interface LRCViewController : UIViewController
+
+@property (weak, nonatomic) id <LRCViewControllerDelegate> delegate;
 
 @end

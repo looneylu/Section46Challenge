@@ -8,8 +8,9 @@
 
 #import "SignInViewController.h"
 #import "CreateAccountViewController.h"
+#import "LRCViewController.h"
 
-@interface SignInViewController () <UITextFieldDelegate, CreateAccountViewControllerDelegate>
+@interface SignInViewController () <UITextFieldDelegate, CreateAccountViewControllerDelegate, LRCViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextfield;
@@ -60,7 +61,14 @@
 
 - (void) didCreateAccount
 {
-    
+    // dismiss CreateAccountViewController 
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)logOut
+{
+    // dismiss LRCViewController
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Navigation
@@ -69,12 +77,23 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
+    
+    // CreateAccountViewController view
     if ([segue.destinationViewController isKindOfClass:[CreateAccountViewController class]])
     {
         // make an instance of CreateAccountViewController and designate it as a delegate
         CreateAccountViewController *createAccountVC = segue.destinationViewController;
         
-        createAccountVC.delegate = self; 
+        createAccountVC.delegate = self;
+    }
+    
+    // LRCViewController view
+    if ([segue.destinationViewController isKindOfClass:[LRCViewController class]])
+    {
+        // make an instance of LRCViewController and designate it as a delegate
+        LRCViewController *currentView = segue.destinationViewController;
+        
+        currentView.delegate = self;
     }
 }
 

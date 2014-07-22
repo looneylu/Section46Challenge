@@ -24,5 +24,11 @@
 }
 
 
+- (IBAction)logOutButtonPressed:(id)sender
+{
+    // call delegate logOut method
+    [self.delegate logOut];
+}
+
 
 @end
