@@ -29,12 +29,14 @@
 
 - (IBAction)logInButtonPressed:(id)sender
 {
-
+    // when log in button is pressed, perform segue to ViewController view
+    [self performSegueWithIdentifier:@"toViewControllerSegue" sender:sender];
 }
 
 - (IBAction)createAccountButtonPressed:(id)sender
 {
-
+    // when create account button is pressed, perform segue to createAccountViewController view
+    [self performSegueWithIdentifier:@"toCreateAccountSegue" sender:sender];
 }
 
 #pragma mark - Delegate Methods
