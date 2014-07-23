@@ -112,6 +112,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="logInButton" destination="bQA-sD-bVz" id="I2f-Kv-rkt"/>
                         <outlet property="passwordTextfield" destination="AE9-1b-dfd" id="NvQ-bA-NF5"/>
                         <outlet property="usernameTextField" destination="MdS-GB-lOv" id="nJj-VR-3n6"/>
                         <segue destination="wWk-bl-nwd" kind="modal" identifier="toCreateAccountSegue" id="tVR-cg-ohP"/>

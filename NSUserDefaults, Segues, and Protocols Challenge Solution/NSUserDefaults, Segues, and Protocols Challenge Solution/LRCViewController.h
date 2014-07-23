@@ -19,5 +19,7 @@
 @interface LRCViewController : UIViewController
 
 @property (weak, nonatomic) id <LRCViewControllerDelegate> delegate;
+@property (strong,nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *password; 
 
 @end

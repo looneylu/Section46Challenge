@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextfield;
+@property (strong, nonatomic) IBOutlet UIButton *logInButton;
 
 @property (strong, nonatomic) NSMutableArray *users;
 
@@ -40,9 +41,17 @@
 #pragma mark - IBAction methods
 
 - (IBAction)logInButtonPressed:(id)sender
+// when log in button is pressed, perform segue to ViewController view
 {
-    // when log in button is pressed, perform segue to ViewController view
-    [self performSegueWithIdentifier:@"toViewControllerSegue" sender:sender];
+    // iterate through users array which holds dictionary objects
+    for (NSDictionary *comparisonDictionary in self.users)
+    {
+        // if user in put matches any of the dictionaries in user array
+        if ([self.usernameTextField.text isEqualToString:[comparisonDictionary objectForKey:USERNAME]] && [self.passwordTextfield.text isEqualToString:[comparisonDictionary objectForKey:USER_PASSWORD]])
+            // perform segue
+            [self performSegueWithIdentifier:@"toViewControllerSegue" sender:sender];
+    }
+
 }
 
 - (IBAction)createAccountButtonPressed:(id)sender
@@ -65,6 +74,14 @@
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
+    // iterate through users array which holds dictionary objects
+    for (NSDictionary *comparisonDictionary in self.users)
+    {
+        // if user in put matches any of the dictionaries in user array
+        if ([self.usernameTextField.text isEqualToString:[comparisonDictionary objectForKey:USERNAME]] && [self.passwordTextfield.text isEqualToString:[comparisonDictionary objectForKey:USER_PASSWORD]])
+            // perform segue
+            [self performSegueWithIdentifier:@"toViewControllerSegue" sender:nil];
+    }
     // hide keyboard
     [self.passwordTextfield resignFirstResponder];
     
@@ -116,10 +133,15 @@
     if ([segue.destinationViewController isKindOfClass:[LRCViewController class]])
     {
         // make an instance of LRCViewController and designate it as a delegate
-        LRCViewController *currentView = segue.destinationViewController;
+        LRCViewController *nextView = segue.destinationViewController;
         
-        currentView.delegate = self;
+        // pass user login information to next view
+        nextView.username = self.usernameTextField.text;
+        nextView.password = self.passwordTextfield.text;
+        
+        nextView.delegate = self;
     }
+
 }
 
 

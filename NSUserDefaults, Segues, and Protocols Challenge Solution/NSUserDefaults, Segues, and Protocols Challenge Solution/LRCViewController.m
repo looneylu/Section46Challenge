@@ -21,6 +21,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    // display user information on screen
+    self.usernameLabel.text = self.username;
+    self.passwordLabel.text = self.password;
 }
 
 

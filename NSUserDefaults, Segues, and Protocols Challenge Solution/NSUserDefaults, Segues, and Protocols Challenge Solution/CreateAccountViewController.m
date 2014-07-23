@@ -47,8 +47,10 @@
 
 - (IBAction)createAccountButtonPressed:(id)sender
 {
+    // add dictionary object from getUserInformation: to newUserLoginInformation array
     [self.newUserLoginInformation addEntriesFromDictionary:[self getUserInformation]];
 
+    // if user input valid information, go back to login screen
     if (self.validUserInput)
     {
         //call delegate method for didCreateAccount
