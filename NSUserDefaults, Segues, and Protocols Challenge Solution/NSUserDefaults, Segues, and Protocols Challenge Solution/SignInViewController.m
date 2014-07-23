@@ -10,10 +10,14 @@
 #import "CreateAccountViewController.h"
 #import "LRCViewController.h"
 
+#define USER_INFORMATION @"User login information"
+
 @interface SignInViewController () <UITextFieldDelegate, CreateAccountViewControllerDelegate, LRCViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextfield;
+
+@property (strong, nonatomic) NSMutableArray *users;
 
 @end
 
@@ -26,6 +30,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // fill users array with NSUserDefaults
+    [self.users addObjectsFromArray:[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFORMATION]];
+    
+    // password textfield responds to delegate methods
     self.passwordTextfield.delegate = self;
 }
 
@@ -41,6 +49,16 @@
 {
     // when create account button is pressed, perform segue to createAccountViewController view
     [self performSegueWithIdentifier:@"toCreateAccountSegue" sender:sender];
+}
+
+#pragma mark - Lazy Instantiation
+
+- (NSMutableArray *)users
+{
+    if (!_users)
+        _users = [[NSMutableArray alloc] init];
+    
+    return _users;
 }
 
 #pragma mark - Delegate Methods
@@ -59,10 +77,17 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void) didCreateAccount
+- (void) didCreateAccount:(NSMutableDictionary *)addedUserInformation
 {
+    // add new user information to users array
+    [self.users addObject:addedUserInformation];
+    
     // dismiss CreateAccountViewController 
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // persist information with NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] setObject:self.users forKey:USER_INFORMATION];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)logOut
